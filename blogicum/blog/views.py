@@ -46,22 +46,18 @@ posts = [
 
 
 def index(request):
-    template = 'blog/index.html'
-    context = {'posts': reversed(posts)}
-    return render(request, template, context)
+    return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
 def post_detail(request, id):
-    template = 'blog/detail.html'
-    try:
+    post_ids = [post['id']for post in posts]
+    if id in post_ids:
         post = posts[id]
-    except IndexError:
-        raise Http404("Пост не найден")
-    context = {'post': post}
-    return render(request, template, context)
+    else:
+        raise Http404('Пост не найден')
+    return render(request, 'blog/detail.html', {'post': post})
 
 
 def category_posts(request, category_slug):
-    template = 'blog/category.html'
-    context = {'category_slug': category_slug}
-    return render(request, template, context)
+    return render(request, 'blog/category.html',
+                  {'category_slug': category_slug})

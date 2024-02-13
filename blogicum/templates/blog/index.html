@@ -5,9 +5,8 @@
 {% endblock %}
 
 {% block content %}
-   <div class="container py-5">
-      <h1>Лента записей</h1>                        
-      {% for post in posts %}
+   <h1>Лента записей</h1>                        
+   {% for post in posts %}
       <hr>
       <article>
          <ul>
@@ -22,10 +21,9 @@
             </li>
          </ul>          
          <p>
-            {{ post.text|truncatewords:10 }}...
+            {{ post.text|truncatewords:10|linebreaks }}
          </p>
          <a href="{% url 'blog:post_detail' post.id %}">Читать полный текст</a>
       </article>
-      {% endfor %}
-   </div>
+   {% endfor %}
 {% endblock %}
