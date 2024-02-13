@@ -49,14 +49,14 @@ def index(request):
     return render(request, 'blog/index.html', {'posts': reversed(posts)})
 
 
-posts_dict = {post['id']: post for post in posts}
+posts_mapping = {post['id']: post for post in posts}
 
 
 def post_detail(request, id):
-    if id not in posts_dict:
+    if id not in posts_mapping:
         raise Http404(f'Пост с id {id} не найден')
     return render(request, 'blog/detail.html',
-                  {'post': posts_dict[id]})
+                  {'post': posts_mapping[id]})
 
 
 def category_posts(request, category_slug):
